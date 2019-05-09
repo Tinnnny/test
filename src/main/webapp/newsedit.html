@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>资讯编辑</title>
+	<link rel="stylesheet" href="css/register.css">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link href="css/yangYi.css" type="text/css" rel="stylesheet">
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="js/jquery-3.3.1.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
+	<script>
+
+		$(function () {
+			//当表单提交时，调用所有的校验方法
+			$("#editForm").submit(function(){
+					//发送ajax请求，提交表单的数据   username=zhangsan&password=123
+					$.post("user/edit",$(this).serialize(),function(data){
+						//处理服务器响应的数据  data  {flag:true,errorMsg:"注册失败"}
+						if(data.flag){
+							alert("编辑成功啦")
+						}else{
+							//注册失败,给errorMsg添加提示信息
+							$("#errorMsg").html(data.errorMsg);
+
+						}
+					});
+			});
+		});
+	</script>
+
+</head>
+<body>
+<!--引入头部-->
+<div id="header"></div>
+<!-- 头部 end -->
+<div class="rg_layout">
+	<div class="rg_form clearfix">
+		<div class="rg_form_left">
+			<p>咨询编辑</p>
+			
+		</div>
+		<div class="rg_form_center">
+			<div id="errorMsg" style="color:red;text-align: center"></div>
+			<!--注册表单-->
+			<form id="editForm" >
+				<!--提交处理请求的标识符-->
+				<input type="hidden" name="action" value="edit">
+				<table style="margin-top: 25px;">
+					<tr>
+						<td class="td_left">
+							<label for="des">描述</label>
+						</td>
+						<td class="td_right">
+							<input type="text" id="des" name="des" placeholder="请输入描述">
+						</td>
+					</tr>
+					<tr>
+						<td class="td_left">
+							<label for="image">图片</label>
+						</td>
+						<td class="td_right">
+							<input type="text" id="image" name="image" placeholder="请输入图片路径">
+						</td>
+					</tr>
+
+					<tr>
+						<td class="td_left">
+							<label for="date">日期</label>
+						</td>
+						<td class="td_right">
+							<input type="date" id="date" name="date" placeholder="年/月/日">
+						</td>
+					</tr>
+					<tr>
+
+						<td class="td_left">
+							<label for="check">验证码</label>
+						</td>
+						<td class="td_right check">
+							<input type="text" id="check" name="check" class="check">
+							<img src="checkCode" height="32px" alt="" onclick="changeCheckCode(this)">
+							<script type="text/javascript">
+								//图片点击事件
+								function changeCheckCode(img) {
+									img.src="checkCode?"+new Date().getTime();
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td class="td_left">
+						</td>
+						<td class="td_right check">
+							<input type="submit" class="submit" value="确定">
+							<span id="msg" style="color: red;"></span>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div class="rg_form_right">
+
+		</div>
+	</div>
+</div>
+<!--引入尾部-->
+<div id="footer"></div>
+<!--导入布局js，共享header和footer-->
+<script type="text/javascript" src="js/include.js"></script>
+
+</body>
+</html>

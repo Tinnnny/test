@@ -1,0 +1,135 @@
+
+.img1{
+    margin-left: 357px;
+}
+#a1{
+    margin-left: 753px;
+    margin-top: 60px;
+    border-radius: 200px;
+    width: 100px;
+    background-color: #1e50ae;
+    color: #ffffff;
+    border-style: none;
+}
+#a2:hover {
+    background-color: #1e50ae;
+    color: #ffffff;
+    display: block;
+}
+#a3:hover{
+    background-color: #1e50ae;
+    color: #ffffff;
+} #a4:hover{
+      background-color: #1e50ae;
+      color: #ffffff;
+  } #a5:hover{
+        background-color: #1e50ae;
+        color: #ffffff;
+    }
+#a2{
+    margin-left: 10px;
+    margin-top: 60px;
+    border-radius: 200px;
+    width: 100px;
+    background-color: #ffffff;
+    color: #000000;
+    border-style: none;
+}#a3{
+     margin-left: 10px;
+     margin-top: 60px;
+     border-radius: 200px;
+     width: 100px;
+     background-color: #ffffff;
+     color: #000000;
+     border-style: none;
+ }#a6{
+     margin-left: 10px;
+     margin-top: 60px;
+     border-radius: 200px;
+     width: 100px;
+     background-color: #ffffff;
+     color: #000000;
+     border-style: none;
+ }#a4{
+      margin-left: 10px;
+      margin-top: 60px;
+      margin-right: 10px;
+      border-radius: 200px;
+      width: 100px;
+      background-color:#ffffff;
+      color: #000000;
+      border-style: none;
+  }#a5{
+       margin-left: 10px;
+       margin-top: 60px;
+       margin-right: 10px;
+       border-radius: 200px;
+       width: 100px;
+       background-color:#ffffff;
+       color: #000000;
+       border-style: none;
+   }
+.span1{
+    font-family: 楷体;
+    font-size: 30px;
+}
+.span1:link{
+    color: #3ec3ff;
+}
+.span1:hover{
+    color: #0f0f0f;
+}
+.img2{
+    margin:0px 420px 0px 40px;
+
+}
+
+.pro{
+    margin-bottom: 60px;
+}
+.tec{
+    margin-top: 40px;
+}
+.card-text{
+    text-indent: 35px;
+}
+.hr1{
+    width:50%;
+    margin-left:462px;
+    color: #686e75;
+}
+#aa1{
+    width:117px;height: 35px;
+    background-color: #c1c5c8;
+    border-style: none;
+} #aa2{
+      width:117px;height: 35px;
+      background-color: #c1c5c8;
+      border-style: none;
+  } #aa3{
+        width:117px;height: 35px;
+        background-color: #c1c5c8;
+        border-style: none;
+    } #aa4{
+          width:117px;height: 35px;
+          background-color: #c1c5c8;
+          border-style: none;
+      }
+.dropdown-menu:hover{
+    background-color: #174499;
+
+}
+#li1:hover{
+    background-color: #174499;
+
+} #li2:hover{
+      background-color: #174499;
+
+  } #li3:hover{
+        background-color: #174499;
+
+    } #li4:hover{
+          background-color: #174499;
+      }
+
+

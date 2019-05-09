@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>结果查询</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/yangYi.css" type="text/css" rel="stylesheet">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="js/include.js"></script>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+
+    <script>
+    $(function () {
+        $("#search").click(function(){
+            $.post("company/checkResult",$("#resultcheckForm").serialize(),function (data) {
+                if(data.flag){
+                    location.href="result_ok.html";
+                }else{
+                    $("#errorMsg").html(data.errorMsg);
+                }
+
+    });
+    });
+    });
+
+</script>
+</head>
+<body>
+<!--引入头部-->
+<div id="header"></div>
+<!-- 头部 end -->
+<img src="images/bg6.jpg" height="260" width="1920"/>
+<div style="height: 100px"></div>
+<div id="errorMsg" style="color:red;text-align: center"></div>
+<div >
+    <form id="resultcheckForm" action="company/checkResult" method="post" accept-charset="utf-8" style="margin-left: 600px;width:330px;height:40px">
+        <input id="code"  name="code"  type="text" placeholder="请输入产品序列号" > <input id="search" name="search" type="submit" class="submit" value="查询" style="height: 40px;background: #FFFFFF">
+
+        <span id="result"></span>
+    </form>
+
+</div>
+<div style="height: 100px"></div>
+
+<!--引入尾部-->
+<div id="footer"></div>
+<!--导入布局js，共享header和footer-->
+<script type="text/javascript" src="js/include.js"></script>
+</body>
+</html>

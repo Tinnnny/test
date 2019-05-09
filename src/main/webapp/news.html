@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在线资讯</title>
+    <link rel="stylesheet" href="css/register.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link href="css/yangYi.css" type="text/css" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.3.1.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function(){
+            load(null)
+        });
+        function load(currentPage) {
+            $.get("purchase/pageQuery2",{currentPage:currentPage},function (pb) {
+                $("#totalPage").html(pb.totalPage);
+                $("#totalCount").html(pb.totalCount);
+                var lis = "";
+                var firstPage='<li style="margin-right:12px" onclick="javascript:load(1)"><a href="javascript:void(0)">首页</a></li>';
+                //计算上一页的代码
+                var beforeNum=pb.currentPage-1;
+                if (beforeNum<=0){
+                    beforeNum=1;
+                }
+                var beforePage='<li style="margin-right:12px" onclick="javascript:load('+beforeNum+')" class="threeword"><a href="javascript:void(0)">上一页</a></li>';
+                lis+=firstPage;
+                lis+=beforePage;
+                //展示分页页码，
+                /*1.一共展示10个页码，能够达到前5后4的效果
+                  2.如果前面不够5个，后面补齐10个
+                  3.如果后面不足4个，前面补齐10个
+                * */
+                var begin;//开始位置
+                var end;//结束位置
+                //要显示10个页码
+                if (pb.totalPage<10){
+                    begin=1;
+                    end=pb.totalPage;
+                }else{
+                    begin=pb.currentPage-5;
+                    end=pb.currentPage+4;
+                    if (begin<1){
+                        begin=1;
+                        end=10;
+                    }
+                    if (end>pb.totalPage){
+                        end=pb.totalPage;
+                        begin=end-9;
+                    }
+                }
+
+                for (var i = begin; i <=end ; i++) {
+                    var li;
+                    //判断当前页码是否等于i
+                    if (pb.currentPage==i){
+                        li ='<li style="margin-right:12px" class="curPage" onclick="javascript:load('+i+')" ><a href="javascript:void(0)">'+i+'</a></li>';
+                    } else{
+                        //创建页码的li
+                        li='<li style="margin-right:12px" onclick="javascript:load('+i+')" ><a href="javascript:void(0)">'+i+'</a></li>';
+                    }
+                    //拼接字符串
+                    lis+=li;
+                }
+                var afterNum=pb.currentPage+1;
+                if (afterNum>=pb.totalPage){
+                    afterNum=pb.totalPage;
+                }
+
+                var lastPage='<li style="margin-right:12px" onclick="javascript:load('+end+')" class="threeword" ><a href="javascript:void(0);">末页</a></li>';
+                var nextPage='<li style="margin-right:12px"  onclick="javascript:load('+afterNum+')" class="threeword"><a href="javascript:void(0);">下一页</a></li>';
+                lis+=nextPage;
+                lis+=lastPage;
+                //将lis内容设置到ul
+                $("#pageNum").html(lis);
+
+                var purchase_lis = "";
+                for (var i = 0; i <pb.list.length ; i++) {
+                    //获取{rid:1,des:"xxx"}
+                    var purchase = pb.list[i];
+                    var li='<li><div class="container"><div class="row"> <img class="col-md-3" style="margin-left: 100px;margin-bottom: 30px" src="'+purchase.image+'">  <span  class="col-md-8" style="width: 500px;margin-left: 50px;font-size: 15px;font-family: 微软雅黑">'+"<br><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+purchase.des+'</span>' +
+                        '<span>'+purchase.date+'</span> ' +
+                        '</div> </div></li>';
+                    purchase_lis += li;                }
+                $("#purchase").html(purchase_lis);
+                //定位到页面顶部
+                window.scrollTo(0,0);
+            });
+        }
+    </script>
+    <script src="js/getParameter.js"></script>
+    <!--导入布局js，共享header和footer-->
+    <script type="text/javascript" src="js/include.js"></script>
+</head>
+<body>
+<!--引入头部-->
+<div id="header"></div>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="images/background.jpg"  alt="仰衣科技-iknow"  >
+            <div class="carousel-caption">
+                <table style="margin-bottom: 150px" >
+                    <tr>
+                        <td style="border-right-style: solid;border-color: #ffffff;border-width:2px;">
+                            <h1 style="margin-left: 300px;font-size:30px">让空间不再阻<br>碍我们的感知</h1>
+                        </td>
+                        <td>
+                            <h2 style="margin-left: 100px;font-size:30px">精准可靠，便捷高效</h2>
+                            <p>iknow</p>
+                            <p>
+                                <a href="login.html" class="btn btn-lg btn-primary" role="button">点我登录</a>
+                            </p>
+                        </td>
+
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="item">
+            <img src="images/background1.jpg"  alt="仰衣科技-iknow">
+            <div class="carousel-caption" style="margin-left: 500px;margin-top: 500px">
+
+                <h1>welcome to iknow</h1>
+                <p>—————精准测量，为纺织品产销保驾护航。</p>
+
+            </div>
+        </div>
+
+    </div>
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<div style="height: 20px"></div>
+<div style="height: 100px">
+    <h3 align="center" style="color: #0f0f0f;font-size: 25px">新闻咨询</h3>
+    <hr color="ffebcd">
+</div>
+
+<ul id="purchase">
+</ul>
+<div class="page_num_inf" style="margin-left: 370px">
+    <i></i> 共
+    <span id="totalPage">12</span>页<span id="totalCount">132</span>条
+</div>
+<div style="height: 20px"></div>
+<div class="pageNum" style="margin-left: 330px"><ul id="pageNum"></ul></div>
+<div style="height: 20px"></div>
+<!--引入尾部-->
+<div id="footer"></div>
+<!--导入布局js，共享header和footer-->
+<script type="text/javascript" src="js/include.js"></script>
+
+</body>
+</html>

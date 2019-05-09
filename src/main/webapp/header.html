@@ -1,0 +1,63 @@
+<!-- 头部 start -->
+<script src="js/getParameter.js"></script>
+<script>
+    $(function () {
+        //查询用户信息
+        $.get("user/findOne",{},function (data) {
+           //{uid:1,name:'李四'}
+           var msg = "欢迎回来，"+data.name;
+           $("#span_username").html(msg);
+       });
+    });
+
+</script>
+
+<header id="header">
+    <img src="images/logo.png" style="position: fixed;top:0px;left: 0px;z-index:5;" class="img1" height="160" width="160"/>
+    <a class="span1" href="index.html" role=button style="position: fixed;top: 40px;left: 500px;z-index:5;">iknow平台</a>
+    <a id= a1 class="btn btn-primary" href="index.html" role=button style="border-radius: 200px;width: 100px;">首页</a>
+    <div  class="btn-group">
+        <a id=a2 type="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" >服务</a>
+        <ul class="dropdown-menu" style="width: 100px;background-color: #1e50ae" role="menu" >
+            <li><a href="booking.html" id="li1">预约检测</a></li>
+            <li><a href="resultcheck.html" id="li2">结果查询</a></li>
+            <li><a href="elabel.html" id="li3">电子标签</a></li>
+            <li><a href="purchase.html" id="li4">在线购买</a></li>
+        </ul>
+    </div>
+    <a id=a3 class="btn btn-primary " href="news.html" role=button style="border-radius: 200px;width: 100px">在线资讯</a>
+    <a id="a5" class="btn btn-primary " href="contactus.html" role=button style="border-radius: 200px;width: 100px;">联系我们</a>
+    <br>
+    <br>
+        <div class="shortcut">
+            <!-- 未登录状态  -->
+            <div class="login_out">
+                <a href="login.html">登录</a>
+                <a href="register.html">注册</a>
+            </div>
+            <!-- 登录状态  -->
+            <div class="login">
+            	
+                <span id="span_username"></span>
+                <a href="#" class="collection">我的收藏</a>
+                <a href="javascript:location.href='user/exit';">退出</a>
+            </div>
+        </div>
+
+
+        <div class="header_wrap">
+            <div class="topbar">
+
+
+                <div class="hottel">
+                    <div class="hot_pic">
+                        <img src="images/hot_tel.jpg" alt="">
+                    </div>
+                    <div class="hot_tel">
+                        <p class="hot_time">客服热线(9:00-6:00)</p>
+                        <p class="hot_num">400-618-9090</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>

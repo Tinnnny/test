@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>预约检测</title><link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/yangYi.css" type="text/css" >
+    <script src="js/jquery-3.3.1.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/include.js"></script>
+    <script>
+        function checkCompanyname() {
+            //1.获取用户名值
+            var companyname = $("#companyname").val();
+            //2.定义正则
+            var reg_companyname = /^\w{8,20}$/;
+            //3.判断，给出提示信息
+            var flag = reg_companyname.test(companyname);
+            if(flag){
+                //用户名合法
+                $("#companyname").css("border","");
+            }else{
+                //用户名非法,加一个红色边框
+                $("#companyname").css("border","1px solid red");
+            }
+            return flag;
+        }
+        //校验产品序列号
+        function checkProseries() {
+            //1.获取密码值
+            var proseries = $("#proseries").val();
+            //2.定义正则
+            var reg_proseries = /^\w{8,20}$/;
+            //3.判断，给出提示信息
+            var flag = reg_proseries.test(proseries);
+            if(flag){
+                //密码合法
+                $("#proseries").css("border","");
+            }else{
+                //密码非法,加一个红色边框
+                $("#proseries").css("border","1px solid red");
+            }
+
+            return flag;
+        }
+        //校验送检方式
+        function checkTestmeth() {
+            //1.获取密码值
+            var testmeth = $("#testmeth").val();
+            //2.定义正则
+            var reg_testmeth = /^\w{1,20}$/;
+            //3.判断，给出提示信息
+            var flag = reg_testmeth.test(testmeth);
+            if(flag){
+                //密码合法
+                $("#testmeth").css("border","");
+            }else{
+                //密码非法,加一个红色边框
+                $("#testmeth").css("border","1px solid red");
+            }
+            return flag;
+        }
+
+        $(function () {
+            //当表单提交时，调用所有的校验方法
+            $("#bookingForm").submit(function(){
+                //1.发送数据到服务器
+                if(checkCompanyname() && checkProseries() && checkTestmeth()){
+                    //校验通过,发送ajax请求，提交表单的数据   username=zhangsan&password=123
+                    $.post("company/booking",$(this).serialize(),function(data){
+                        //处理服务器响应的数据  data  {flag:true,errorMsg:"注册失败"}
+
+                        if(data.flag){
+                            //注册成功，跳转成功页面
+                            location.href="booking_ok.html";
+                        }else{
+                            //注册失败,给errorMsg添加提示信息
+                            $("#errorMsg").html(data.errorMsg);
+                        }
+                    });
+                }
+                //2.不让页面跳转
+                return false;
+                //如果这个方法没有返回值，或者返回为true，则表单提交，如果返回为false，则表单不提交
+            });
+            //当某一个组件失去焦点是，调用对应的校验方法
+            $("#companyname").blur(checkCompanyname());
+            $("#proseries").blur(checkProseries());
+            $("#testmeth").blur(checkTestmeth());
+        });
+    </script>
+</head>
+<body>
+<!--引入头部-->
+<div id="header"></div>
+<!-- 头部 end -->
+<div class="rg_layout">
+    <div class="rg_form clearfix">
+        <div class="rg_form_left">
+            <p>预约检测</p>
+            <p>USER BOOKING</p>
+        </div>
+        <div class="rg_form_center">
+            <div id="errorMsg" style="color:red;text-align: center"></div>
+            <!--注册表单-->
+            <form id="bookingForm" action="company">
+                <!--提交处理请求的标识符-->
+                <input type="hidden" name="action" value="booking">
+                <table style="margin-top: 25px;">
+                    <tr>
+                        <td class="td_left">
+                            <label for="companyname">公司</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="companyname" name="companyname" placeholder="请输入生产公司名称">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">
+                            <label for="proseries">序列号</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="proseries" name="proseries" placeholder="请输入产品序列号">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">
+                            <label for="testmeth">送检方式</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="testmeth" name="testmeth" placeholder="请输入送检方式">
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="td_left">
+                            <label for="bookingdate">预约日期</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="date" id="bookingdate" name="bookingdate" placeholder="年/月/日">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_left">
+                            <label for="testnum">送检件数</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="testnum" name="testnum" placeholder="请输入送检件数">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_left">
+                            <label for="address">地址</label>
+                        </td>
+                        <td class="td_right">
+                            <input type="text" id="address" name="address" placeholder="请输入地址">
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td class="td_left">
+                            <label for="check">验证码</label>
+                        </td>
+                        <td class="td_right check">
+                            <input type="text" id="check" name="check" class="check">
+                            <img src="checkCode" height="32px" alt="" onclick="changeCheckCode(this)">
+                            <script type="text/javascript">
+                                //图片点击事件
+                                function changeCheckCode(img) {
+                                    img.src="checkCode?"+new Date().getTime();
+                                }
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">
+                        </td>
+                        <td class="td_right check">
+                            <input type="submit" class="submit" value="确定">
+                            <span id="msg" style="color: red;"></span>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="rg_form_right">
+
+        </div>
+    </div>
+</div>
+<!--引入尾部-->
+<div id="footer"></div>
+<!--导入布局js，共享header和footer-->
+<script type="text/javascript" src="js/include.js"></script>
+
+</body>
+</html>
